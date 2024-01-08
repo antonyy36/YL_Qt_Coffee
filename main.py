@@ -3,13 +3,14 @@ import sys
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QMainWindow, QTableWidgetItem
+from UI.UI import *
 
 
-class MyWidget(QMainWindow):
+class MyWidget(QMainWindow, Ui_MainWindow2):
     def __init__(self):
         super().__init__()
-        uic.loadUi('main.ui', self)
-        self.con = sqlite3.connect("coffee.sqlite3")
+        self.setupUi(self)
+        self.con = sqlite3.connect("data/coffee.sqlite3")
         self.f = False
         self.AddButton.clicked.connect(self.adding)
         self.AddButton.click()
@@ -46,11 +47,11 @@ class MyWidget(QMainWindow):
         self.AddButton.click()
 
 
-class AddWidget(QMainWindow):
+class AddWidget(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.parent1 = parent
-        uic.loadUi('addEditCoffeeForm.ui', self)
+        self.setupUi(self)
         self.SaveButton.clicked.connect(self.get_adding_verdict)
 
     def get_adding_verdict(self):
